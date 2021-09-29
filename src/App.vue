@@ -1,25 +1,20 @@
 <template>
-	<div>hola!</div>
+	<div>
+		<QuizParent />
+	</div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue';
+import QuizParent from './components/QuizParent.vue';
 
 export default {
 	name: 'App',
 	components: {
 		HelloWorld,
+		QuizParent,
 	},
 };
 </script>
 
-<style>
-#app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-</style>
+<style></style>
