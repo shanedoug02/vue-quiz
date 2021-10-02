@@ -1,5 +1,5 @@
 <template>
-	<QuizChild :quizData="quizData" :currentQuestion="currentQuestion" @selection="setSelected" @evaluate="see" />
+	<QuizChild :quizData="quizData" :currentQuestion="currentQuestion" @currentSelection="setCurrentSelection" @finalSelection="setFinalSelection" />
 </template>
 
 <script>
@@ -52,16 +52,17 @@ export default {
 		};
 	},
 	methods: {
-		setSelected(emittedSelection) {
-			// for (let item of this.quizData) {
-			// 	for (let eachAnswer of item.answersArr) {
-			// 		eachAnswer.isSelected = false;
-			// 	}
-			// }
+		setCurrentSelection(emittedSelection) {
+			//Removes the 'isSelected' property from previous selections
+			for (let item of this.quizData) {
+				for (let eachAnswer of item.answersArr) {
+					eachAnswer.isSelected = false;
+				}
+			}
 			emittedSelection.isSelected = true;
 			this.currentSelection.unshift(emittedSelection.option);
 		},
-		see() {
+		setFinalSelection() {
 			this.finalSelections.push(this.currentSelection[0]);
 			this.currentQuestion++;
 			console.log('finals', this.finalSelections);
