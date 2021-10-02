@@ -53,7 +53,7 @@ export default {
 	},
 	methods: {
 		setCurrentSelection(emittedSelection) {
-			//Removes the 'isSelected' property from previous selections
+			//Removes the 'isSelected' property from previously clicked checkboxes
 			for (let item of this.quizData) {
 				for (let eachAnswer of item.answersArr) {
 					eachAnswer.isSelected = false;
@@ -64,6 +64,7 @@ export default {
 		},
 		setFinalSelection() {
 			this.finalSelections.push(this.currentSelection[0]);
+
 			this.currentQuestion++;
 			console.log('finals', this.finalSelections);
 		},

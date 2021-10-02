@@ -1,5 +1,5 @@
 <template>
-	<div class="quiz-child-container">
+	<div v-if="currentQuestion < quizData.length" class="quiz-child-container">
 		<div v-for="(item, idx) of quizData" :key="item">
 			<div v-if="idx === currentQuestion">
 				<h1>{{ item.question }}</h1>
@@ -9,7 +9,8 @@
 				</div>
 			</div>
 		</div>
-		<button @click="emitFinalSelection">Next</button>
+		<button v-if="currentQuestion < quizData.length - 1" @click="emitFinalSelection">Next</button>
+		<button v-else @click="emitFinalSelection">Submit</button>
 	</div>
 </template>
 
