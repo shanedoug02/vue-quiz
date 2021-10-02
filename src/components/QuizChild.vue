@@ -3,8 +3,8 @@
 		<div v-for="(item, idx) of quizData" :key="item">
 			<div v-if="idx === currentQuestion">
 				<h1>{{ item.question }}</h1>
-				<div class="answers-container" v-for="(answer, index) of item.answersArr" :key="answer">
-					<div @click="triggerSelected(answer)" class="check-box" :id="index" :class="{ selected: answer.isSelected }"></div>
+				<div class="answers-container" v-for="answer of item.answersArr" :key="answer">
+					<div @click="triggerSelected(answer)" class="check-box" :class="{ selected: answer.isSelected }"></div>
 					{{ answer.option }}
 				</div>
 			</div>
@@ -18,8 +18,8 @@ export default {
 	name: 'QuizChild',
 	props: ['quizData', 'currentQuestion'],
 	methods: {
-		triggerSelected(emittedData) {
-			this.$emit('emittedSelection', emittedData);
+		triggerSelected(emitData) {
+			this.$emit('selection', emitData);
 		},
 		saveSelected() {
 			this.$emit('evaluate');

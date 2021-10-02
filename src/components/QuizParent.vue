@@ -1,5 +1,5 @@
 <template>
-	<QuizChild :quizData="quizData" :currentQuestion="currentQuestion" @emittedSelection="setSelected" @evaluate="see" />
+	<QuizChild :quizData="quizData" :currentQuestion="currentQuestion" @selection="setSelected" @evaluate="see" />
 </template>
 
 <script>
@@ -49,21 +49,17 @@ export default {
 			currentQuestion: 0,
 			currentSelection: [],
 			finalSelections: [],
-			results: [],
 		};
 	},
 	methods: {
-		setSelected(payload) {
-			for (let item of this.quizData) {
-				for (let ans of item.answersArr) {
-					ans.isSelected = false;
-				}
-			}
-			payload.isSelected = true;
-			if (payload.isSelected) {
-				this.currentSelection.unshift(payload.option);
-				console.log(this.currentSelection);
-			}
+		setSelected(emittedSelection) {
+			// for (let item of this.quizData) {
+			// 	for (let eachAnswer of item.answersArr) {
+			// 		eachAnswer.isSelected = false;
+			// 	}
+			// }
+			emittedSelection.isSelected = true;
+			this.currentSelection.unshift(emittedSelection.option);
 		},
 		see() {
 			this.finalSelections.push(this.currentSelection[0]);
