@@ -1,5 +1,12 @@
 <template>
-	<QuizChild :quizData="quizData" :currentQuestion="currentQuestion" @currentSelection="setCurrentSelection" @finalSelection="setFinalSelection" />
+	<QuizChild
+		:quizData="quizData"
+		:currentQuestion="currentQuestion"
+		:showResults="showResults"
+		:finalSelections="finalSelections"
+		@currentSelection="setCurrentSelection"
+		@finalSelection="setFinalSelection"
+	/>
 </template>
 
 <script>
@@ -49,6 +56,7 @@ export default {
 			currentQuestion: 0,
 			currentSelection: [],
 			finalSelections: [],
+			showResults: false,
 		};
 	},
 	methods: {
@@ -60,13 +68,21 @@ export default {
 				}
 			}
 			emittedSelection.isSelected = true;
-			this.currentSelection.unshift(emittedSelection.option);
+			this.currentSelection.unshift(emittedSelection);
 		},
 		setFinalSelection() {
+			this.currentSelection.forEach((selection) => (selection.isSelected = true));
 			this.finalSelections.push(this.currentSelection[0]);
 
 			this.currentQuestion++;
 			console.log('finals', this.finalSelections);
+			if (this.currentQuestion === this.quizData.length) {
+				this.results();
+			}
+		},
+		results() {
+			console.log('hola');
+			this.showResults = true;
 		},
 	},
 };
